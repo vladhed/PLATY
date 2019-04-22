@@ -19,12 +19,10 @@
 int synerrno;
 /* Global variables */
 static Token lookahead;
-/*static Buffer *sc_buf;*/
 
 /* Scanner functions and variables */
 extern Token malar_next_token();
 extern int line;
-/*extern STD sym_table; */
 extern Buffer *str_LTBL;
 extern char *kw_table[KWT_SIZE];
 
@@ -35,3 +33,40 @@ void syn_eh(int);
 void syn_printe(void);
 void gen_incode(char*);
 
+void primary_arithmetic_expression();
+void unary_arithmetic_expression();
+void multiplicative_arithmetic_expression_p();
+void multiplicative_arithmetic_expression();
+void additive_arithmetic_expression_p();
+void additive_arithmetic_expression();
+void arithmetic_expression();
+void primary_string_expression();
+void string_expression_p();
+void string_expression();
+void assignment_expression();
+void assignment_statement();
+void pre_condition_p();
+void primary_a_relational_expression();
+void primary_s_relational_expression();
+void relational_expression_a_p();
+void relational_expression_s_p();
+void relational_expression();
+void logical_and_expression_p();
+void logical_and_expression();
+void logical_or_expression();
+void logical_or_expression_p();
+void conditional_expression();
+void selection_statement();
+void iteration_statement();
+void statement();
+void statements();
+void sub_statements();
+void opt_statements(); 
+void variable_identifier();
+void variable_list_p();
+void variable_list(); 
+void program(); 
+void input_statement();
+void output_list();
+void output_statement();
+void syn_printi(int);
