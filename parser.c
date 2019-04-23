@@ -358,7 +358,6 @@ void pre_condition_p() {
            syn_printe();
            break;
     }
-    gen_incode("PLATY: Pre-condition statement parsed");
 }
 
 /* FIRST set:  AVID_T, FPL_T, INL_T  */
@@ -515,7 +514,7 @@ void selection_statement() {
     opt_statements();
     match(RBR_T, NO_ATTR);
     match(EOS_T, NO_ATTR);
-    gen_incode("PLATY: IF statement parsed");
+    gen_incode("PLATY: Selection statement parsed");
 }
 
 void iteration_statement() {
@@ -526,10 +525,10 @@ void iteration_statement() {
     match(RPR_T, NO_ATTR);
     match(KW_T, REPEAT);
     match(LBR_T, NO_ATTR);
-    opt_statements();
+    statements();
     match(RBR_T, NO_ATTR);
     match(EOS_T, NO_ATTR);
-    gen_incode("PLATY: WHILE statement parsed");
+    gen_incode("PLATY: Iteration statement parsed");
 }
 
  /* FIRST set: AVID_T, SVID_T, IF, REPEAT, READ, WRITE */
@@ -571,14 +570,14 @@ void statement() {
 /* FIRST set: AVID_T, SVID_T, IF, WHILE, READ, WRITE */
 void statements() {
     statement();
-    sub_statements();
+    statements_p();
 }
 
 /*
  * Production: sub_Statements 
  * { AVID_T, SVID_T, IF, WHILE, READ, WRITE, empty }
  */
-void sub_statements() {
+void statements_p() {
     switch (lookahead.code) {
         case KW_T:
             /*
@@ -596,7 +595,7 @@ void sub_statements() {
         case AVID_T:
         case SVID_T:
             statement();
-            sub_statements();
+            statements_p();
             return;
     }
 }
@@ -619,7 +618,7 @@ void opt_statements(){
                     break; 
             } 
         default: /*empty string – optional statements*/ ;  
-            gen_incode("PLATY: Optional statements parsed"); 
+            gen_incode("PLATY: Opt_statements parsed"); 
     }
 }
 
@@ -680,20 +679,21 @@ void output_list() {
         case AVID_T: 
         case SVID_T: 
             variable_list(); 
-            return;
+            break;
 
         case STR_T: 
             match(lookahead.code, NO_ATTR);
-            return;
+            gen_incode("PLATY: Output list (string literal) parsed");
+            break;
         
         /* if the argument list is empty, just return */
         case RPR_T: 
-            return;
+            gen_incode("PLATY: Output list (empty) parsed");
+            break;
 
         default:
-            return;
+            break;
     }
-    gen_incode("PLATY: Output statement arguments parsed");
 }
 
 void output_statement() {

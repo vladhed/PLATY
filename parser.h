@@ -60,7 +60,7 @@ void selection_statement();
 void iteration_statement();
 void statement();
 void statements();
-void sub_statements();
+void statements_p();
 void opt_statements(); 
 void variable_identifier();
 void variable_list_p();
